@@ -1,0 +1,28 @@
+# Ignorar archivos relacionados con el entorno virtual de Python
+venv/
+
+# Ignorar archivos de caché de Python
+__pycache__/
+*.py[cod]
+
+# Ignorar archivos de logs
+*.log
+
+# Ignorar configuraciones de editores y entornos de desarrollo
+.vscode/
+.idea/
+*.swp
+
+# Ignorar archivos de Docker innecesarios
+Dockerfile
+.dockerignore
+
+# Ignorar archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de dependencia local o de construcción no necesarios
+*.db
+*.pid
+*.sqlite3
+node_modules/

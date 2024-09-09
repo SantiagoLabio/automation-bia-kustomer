@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    image: python:3.11-slim
+    container_name: fastapi-app-ci
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: Dockerfile  # Usa el Dockerfile que compartiste para construir la imagen
+    volumes:
+      - .:/app  # Monta el directorio de trabajo de tu aplicación en el contenedor
+    environment:
+      - ENV=ci  # Variables específicas para el entorno CI
+    env_file:
+      - .env  # Carga las variables de entorno desde el archivo .env
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+             pytest"  # Ejecuta los tests automáticamente en el contenedor
+    networks:
+      - ci-network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13-alpine  # Usa una imagen de PostgreSQL para simular una base de datos en CI
+    container_name: postgres-ci
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: testdb
+    volumes:
+      - postgres_data_ci:/var/lib/postgresql/data
+    networks:
+      - ci-network
+
+networks:
+  ci-network:
+    driver: bridge
+
+volumes:
+  postgres_data_ci:

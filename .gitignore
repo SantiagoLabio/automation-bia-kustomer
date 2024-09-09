@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+
+# Entornos virtuales
+env/
+venv/
+.venv/
+ENV/
+*.env
+
+# Archivos de configuración
+*.log
+*.ini
+*.yaml
+*.toml
+
+# Archivos temporales
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Docker
+*.db
+*.pid
+*.sqlite3
+.DS_Store
+
+# Sistema operativo
+Thumbs.db
+.idea/
+.vscode/

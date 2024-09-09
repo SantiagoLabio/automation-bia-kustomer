@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    image: python:3.11-slim  # Utiliza la imagen de Python
+    container_name: fastapi-app
+    working_dir: /app  # Establece el directorio de trabajo
+    volumes:
+      - .:/app  # Monta el contenido de tu directorio local en el contenedor
+    ports:
+      - "2181:2181"  # Mapea el puerto 2181 del contenedor al puerto 2181 de tu máquina host
+    environment:
+      # Define las variables de entorno si no usas un archivo .env
+      # o si prefieres no montarlo como volumen
+      # - ENV_VAR=valor
+    env_file:
+      - .env  # Carga las variables de entorno desde el archivo .env
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+             uvicorn app.main:app --host 0.0.0.0 --port 2181"  # Cambia el puerto en uvicorn a 2181
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
